@@ -17,7 +17,7 @@
 # - scale definitions can be reused! (like `math_beliefs_likert`!)
 #
 # - we can easily define different versions of the data (like `restricted` and `public`),
-#   and re-use a lot of our definitions
+#   and still re-use our definitions :)
 
 variables:
   stu_id:
@@ -27,13 +27,16 @@ variables:
       min: 1300
       max: 1400
       unique: true
+    releases:
+      - public
+      - restricted
 
   svy_date:
     description: Date of survey
     type: date
     format: "YYYY-MM-DD"
     releases:
-      - restricted
+      - restricted # <-- note that this is only available in the restricted version!
 
   int:
     description: Intervention level
@@ -41,6 +44,9 @@ variables:
     categories:
       - { value: 0, label: "control" }
       - { value: 1, label: "treatment" }
+    releases:
+      - public
+      - restricted
 
   grade_level:
     description: Student grade level
@@ -50,26 +56,41 @@ variables:
       - { value: 10, label: "10th grade" }
       - { value: 11, label: "11th grade" }
       - { value: 12, label: "12th grade" }
+    releases:
+      - public
+      - restricted
 
   math1:
     description: I enjoy learning math.
     type: ordinal
     categories: math_beliefs_likert
+    releases:
+      - public
+      - restricted
 
   math2:
     description: I believe I can do well in math.
     type: ordinal
     categories: math_beliefs_likert
+    releases:
+      - public
+      - restricted
 
   math3:
     description: Other people believe I can do well in math.
     type: ordinal
     categories: math_beliefs_likert
+    releases:
+      - public
+      - restricted
 
   math4:
     description: I want to learn more math.
     type: ordinal
     categories: math_beliefs_likert
+    releases:
+      - public
+      - restricted
 
 missing_values:
   - { value: -99, label: "missing" }
@@ -82,7 +103,9 @@ releases:
 
   public:
     description: This version of the data is available to all
-    redaction_value: redacted
+
+# Define the missing label to use when values are redacted in a release
+redacted_value: redacted
 
 named_scales:
   math_beliefs_likert:
