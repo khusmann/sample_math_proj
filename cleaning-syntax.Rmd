@@ -108,8 +108,8 @@ svy %>%
 
 ```{r (12) Add missing values}
 
-# The global remap takes care of this! Then the "missing" value is converted properly by the codebook
-# definition 
+# The global remap in w1_mathproj_stu_svy_codebook.yaml takes care of this! Then the "missing"
+# value is converted properly by the codebook definition 
 
 ```
 
