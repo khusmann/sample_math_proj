@@ -39,7 +39,7 @@ could scan the configuration files and give the user warnings when they were
 configuring things in weird ways (compared to a raw script, where decisions are
 no-holds-barred)
 
-Future versions would have the capacity for all kinds of hand features, like the
+Future versions would have the capacity for all kinds of handy features, like the
 ability to rename a variable in your codebook, and have the change automatically
 propogate to all of the data file yaml definitions. Wouldn't that be handy??
 
