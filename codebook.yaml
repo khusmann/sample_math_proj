@@ -1,0 +1,93 @@
+# This is an example codebook definition that would act as the single source
+# of truth for the project. This is a human AND machine-readable file! This
+# means that it's easy to edit and maintain by hand, but my R package could
+# read it and automatically do things with the information
+#
+# For example, from this definition, my package would be able to:
+#
+# - Generate data dictionaries for the project (similar in format to
+#   data/output/mathproj_stu_svy_data-dictionary.xlsx)
+#
+# - Automatically create `pointblank` validators for ensuring data quality
+#
+# - Embed metadata into the data files themselves (e.g. *.sav files)
+#
+# Notice how:
+#
+# - scale definitions can be reused! (like `math_beliefs_likert`!)
+#
+# - we can easily define different versions of the data (like `restricted` and `public`),
+#   and re-use a lot of our definitions
+
+variables:
+  stu_id:
+    description: Student study ID
+    type: number
+    constraints:
+      min: 1300
+      max: 1400
+      unique: true
+
+  svy_date:
+    description: Date of survey
+    type: date
+    format: "YYYY-MM-DD"
+    releases:
+      - restricted
+
+  int:
+    description: Intervention level
+    type: categorical
+    categories:
+      - { value: 0, label: "control" }
+      - { value: 1, label: "treatment" }
+
+  grade_level:
+    description: Student grade level
+    type: ordinal
+    categories:
+      - { value: 9, label: "9th grade" }
+      - { value: 10, label: "10th grade" }
+      - { value: 11, label: "11th grade" }
+      - { value: 12, label: "12th grade" }
+
+  math1:
+    description: I enjoy learning math.
+    type: ordinal
+    categories: math_beliefs_likert
+
+  math2:
+    description: I believe I can do well in math.
+    type: ordinal
+    categories: math_beliefs_likert
+
+  math3:
+    description: Other people believe I can do well in math.
+    type: ordinal
+    categories: math_beliefs_likert
+
+  math4:
+    description: I want to learn more math.
+    type: ordinal
+    categories: math_beliefs_likert
+
+missing_values:
+  - { value: -99, label: "missing" }
+  - { value: -98, label: "redacted" }
+
+releases:
+  restricted:
+    description:
+      This version of the data would require special permission to use
+
+  public:
+    description: This version of the data is available to all
+    redaction_value: redacted
+
+named_scales:
+  math_beliefs_likert:
+    - { value: 1, label: "Strongly disagree" }
+    - { value: 2, label: "Disagree" }
+    - { value: 3, label: "Neutral" }
+    - { value: 4, label: "Agree" }
+    - { value: 5, label: "Strongly agree" }

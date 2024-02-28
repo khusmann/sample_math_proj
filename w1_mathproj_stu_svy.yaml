@@ -1,0 +1,49 @@
+# This file matches columns in a raw source file to match the names
+# of variables in the codebook
+
+# It does two things: renames columns, and recodes / replaces values
+# this way, the resulting data are ready to be converted by the codebook
+
+path: "data/input/w1_mathproj_stu_svy_raw.csv"
+
+columns:
+  # Columns that don't need to be changed can just be listed like this:
+  - stu_id
+  - svy_date
+
+  # Columns can be renamed like this:
+  - grade_level:
+      src: grade_evel
+
+  # Columns can be recoded as well to get ready for the codebook:
+  - math1:
+      remap: math_beliefs_likert
+
+  # We can also make fixes like this:
+  - math2:
+      remap:
+        1: "strongly disagree"
+        2: "disagree"
+        3: "neutral"
+        4: "agree"
+        "4\n": "agree"
+        5: "strongly agree"
+
+  - math3:
+      remap: math_beliefs_likert
+
+  - math4:
+      remap: math_beliefs_likert
+
+# Named remaps
+named_remaps:
+  math_beliefs_likert:
+    1: "strongly disagree"
+    2: "disagree"
+    3: "neutral"
+    4: "agree"
+    5: "strongly agree"
+
+# Global remaps (for missing values)
+global_remap:
+  "": missing # Replace all blank values with "missing"
